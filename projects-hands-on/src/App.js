@@ -1,49 +1,56 @@
-import React, { useState } from 'react'
-import Menu from './Menu'
-import Categories from './Categories'
-import items from './data'
-import { useEffect } from 'react'
-
+import React, { useState, useEffect } from 'react'
+import ListCompany from './ListCompany'
+import ListExperience from './Experience'
+// ATTENTION!!!!!!!!!!
+// I SWITCHED TO PERMANENT DOMAIN
+const url = 'https://course-api.com/react-tabs-project'
 function App() {
-  const [dataMenu, setDataMenu] = useState(items)
-  const [categories, setCategories] = useState([])
-  useEffect(() => {
-    const memo = {}
-    const categories = items.reduce(
-      (acc, el) => {
-        if (!(el.category in memo)) {
-          acc.push(el.category)
-        }
-        memo[el.category] = true
-        return acc
-      },
-      ['All']
-    )
-    setCategories(categories)
-  }, [])
-  const handleFilterByMenu = (category) => {
-    if (category === 'All') return setDataMenu(items)
-    const newData = items.filter((el) => el.category !== category)
-    setDataMenu(newData)
+  const [experiences, setExperiences] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [companies, setCompanies] = useState([])
+  const [target, setTarget] = useState(0)
+  const getExperienceData = async () => {
+    try {
+      setLoading(true)
+      const res = await fetch(url)
+      const data = await res.json()
+      const companies = data.map((el) => el.company)
+      setExperiences(data)
+      setCompanies(companies)
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
   }
 
+  const handleChangeCompany = (id) => {
+    const target = experiences.findIndex((el) => el.id === id)
+    setTarget(target)
+  }
+
+  useEffect(() => {
+    getExperienceData()
+  }, [])
+
   return (
-    <main>
-      <section className='menu-section section'>
-        <div className='menu-title'>
-          <h2>our Menu</h2>
-          <div className='underline'></div>
+    <main className='section'>
+      <div className='section-header'>
+        <h2>Experience</h2>
+        <div className='underline'></div>
+        {loading && <h2>Loadding...</h2>}
+      </div>
+      <article className='section-center'>
+        <div className='list-company'>
+          <ListCompany companies={companies}></ListCompany>
         </div>
-        <div className='menu-categories'>
-          <Categories
-            handleFilterByMenu={handleFilterByMenu}
-            categories={categories}
-          ></Categories>
+        <div className='list-experience'>
+          <ListExperience
+            experience={experiences[target]}
+            handleChangeCompany={handleChangeCompany}
+          ></ListExperience>
         </div>
-        <div className='menu-details section-center'>
-          <Menu menu={dataMenu}></Menu>
-        </div>
-      </section>
+      </article>
     </main>
   )
 }
