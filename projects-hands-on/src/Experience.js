@@ -22,6 +22,7 @@ const Experience = ({ experience }) => {
               ))}
             </div>
           </div>
+          <button className='explore'>More Info</button>
         </div>
       )}
     </React.Fragment>

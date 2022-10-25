@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ListCompany from './ListCompany'
-import ListExperience from './Experience'
+import Experience from './Experience'
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
 const url = 'https://course-api.com/react-tabs-project'
@@ -32,23 +32,27 @@ function App() {
   useEffect(() => {
     getExperienceData()
   }, [])
-
+  if (loading)
+    return (
+      <div className='section-header'>
+        <h2>Loadding...</h2>
+      </div>
+    )
   return (
     <main className='section'>
       <div className='section-header'>
         <h2>Experience</h2>
         <div className='underline'></div>
-        {loading && <h2>Loadding...</h2>}
       </div>
       <article className='section-center'>
         <div className='list-company'>
           <ListCompany companies={companies}></ListCompany>
         </div>
         <div className='list-experience'>
-          <ListExperience
+          <Experience
             experience={experiences[target]}
             handleChangeCompany={handleChangeCompany}
-          ></ListExperience>
+          ></Experience>
         </div>
       </article>
     </main>

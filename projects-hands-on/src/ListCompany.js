@@ -4,10 +4,9 @@ const ListCompany = ({ companies }) => {
   return (
     <ul>
       {companies.map((company) => (
-        <div className='company'>
-          <li key={company}>{company}</li>
-          <div className='underline-company'></div>
-        </div>
+        <li className='company'>
+          <p key={company}>{company}</p>
+        </li>
       ))}
     </ul>
   )

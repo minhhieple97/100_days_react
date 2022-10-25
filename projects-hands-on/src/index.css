@@ -273,21 +273,20 @@ Jobs
 .section-center {
 }
 
-.list-company {
-}
-
 .list-company ul {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
   flex-wrap: wrap;
   width: 20rem;
-  margin-top: 4rem;
   margin-left: auto;
   margin-right: auto;
 }
 
 .list-company ul li {
-  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.25rem;
 }
 
 .underline-company {
@@ -295,14 +294,24 @@ Jobs
   height: 0.25rem;
   background-color: var(--clr-primary-6);
 }
-
+.list-company {
+  padding: 1.5rem;
+}
 .experience {
-  padding: 3rem;
+  padding: 1.5rem;
 }
 .job-title {
   font-size: 2rem;
   color: var(--clr-black);
 }
+.company p {
+  font-size: 1.25rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  cursor: pointer;
+  border: 2px solid var(--clr-grey-10);
+  color: var(--clr-black);
+}
+
 .company-name {
   background-color: var(--clr-primary-8);
   font-size: 1.15rem;
@@ -320,4 +329,51 @@ Jobs
 }
 
 .job-impact-description {
+  display: inline-block;
+  max-width: 50rem;
+}
+.job-impact {
+  display: flex;
+  column-gap: 1.25rem;
+}
+@media screen and (max-width: 991px) {
+  .company p:hover {
+    border-bottom: 2px solid var(--clr-grey-6);
+  }
+}
+@media screen and (min-width: 992px) {
+  .list-company ul {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .section-center {
+    display: flex;
+    align-items: flex-start;
+  }
+  .list-company {
+    flex: 0 0 100px;
+  }
+
+  .list-experience {
+    flex-grow: 1;
+  }
+
+  .company p:hover {
+    border-left: 2px solid var(--clr-grey-6);
+  }
+}
+
+.explore {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--clr-white);
+  padding: 0.25rem 2.75rem 0.25rem 2.75rem;
+  background-color: var(--clr-primary-6);
+  border-radius: 6px;
+  border: 2px solid var(--clr-white);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 2rem;
 }
