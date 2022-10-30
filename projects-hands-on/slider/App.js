@@ -5,12 +5,8 @@ import people from './data';
 function App() {
   const [index, setIndex] = useState(0)
   useEffect(() => {
-    if (index < 0) setIndex(() => {
-      return people.length - 1
-    })
-    else if (index > people.length - 1) setIndex(() => {
-      return 0;
-    })
+    if (index < 0) setIndex(people.length - 1)
+    else if (index > people.length - 1) setIndex(0)
     const idInterval = setInterval(() => {
       setIndex(prevState => prevState + 1);
     }, 5000)
