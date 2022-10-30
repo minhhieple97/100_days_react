@@ -16,7 +16,6 @@ function App() {
     }, 5000)
     return () => clearInterval(idInterval)
   }, [index])
-  console.log({ index })
   return <section className="section">
     <div className="title">
       <h2>
